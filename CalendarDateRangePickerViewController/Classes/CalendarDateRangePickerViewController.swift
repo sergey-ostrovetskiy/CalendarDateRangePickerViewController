@@ -60,10 +60,12 @@ public class CalendarDateRangePickerViewController: UICollectionViewController {
     public override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        let item = collectionView(collectionView, numberOfItemsInSection: numberOfSections(in: collectionView) - 1) - 1
-    
-        let lastItemIndex = IndexPath(item: item, section: (numberOfSections(in: collectionView) - 1))
-        collectionView.scrollToItem(at: lastItemIndex, at: .top, animated: true)
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.01) {
+            let item = self.collectionView(self.collectionView, numberOfItemsInSection: self.numberOfSections(in: self.collectionView) - 1) - 1
+        
+            let lastItemIndex = IndexPath(item: item, section: (self.numberOfSections(in: self.collectionView) - 1))
+            self.collectionView.scrollToItem(at: lastItemIndex, at: .top, animated: false)
+        }
     }
     
     @objc func didTapCancel() {
